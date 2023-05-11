@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# set -x
 # Enter server directory
 cd papermc
 
@@ -27,21 +27,31 @@ then
   # Download new server jar
   wget ${URL} -O ${JAR_NAME}
   
-  # If this is the first run, accept the EULA
-  if [ ! -e eula.txt ]
-  then
-    # Run the server once to generate eula.txt
-    java -jar ${JAR_NAME}
-    # Edit eula.txt to accept the EULA
-    sed -i 's/false/true/g' eula.txt
-  fi
 fi
+
+# If this is the first run, accept the EULA
+if [ ! -e eula.txt ]
+then
+  # Run the server once to generate eula.txt
+  java -jar ${JAR_NAME}
+  # Edit eula.txt to accept the EULA
+fi
+sed -i 's/false/true/g' eula.txt
 
 # Add RAM options to Java options if necessary
 if [ ! -z "${MC_RAM}" ]
 then
   JAVA_OPTS="-Xms${MC_RAM} -Xmx${MC_RAM} ${JAVA_OPTS}"
 fi
+
+# Configure server
+sed -i "s/^motd=.*/motd=${MC_MOTD}/" server.properties
+sed -i "s/^difficulty=.*/difficulty=${MC_DIFFICULTY}/" server.properties
+sed -i "s/^resource-pack=.*/resource-pack=${MC_RESOURCE_PACK}/" server.properties
+sed -i "s/^resource-pack-sha1=.*/resource-pack-sha1=${MC_RESOURCE_PACK_SHA1}/" server.properties
+sed -i "s/^force-gamemode=.*/force-gamemode=${MC_FORCE_GAMEMODE}/" server.properties
+
+
 
 # Start server
 exec java -server ${JAVA_OPTS} -jar ${JAR_NAME} nogui
