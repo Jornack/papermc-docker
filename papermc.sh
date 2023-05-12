@@ -20,7 +20,7 @@ JAR_NAME=paper-${MC_VERSION}-${PAPER_BUILD}.jar
 URL=${URL}/builds/${PAPER_BUILD}/downloads/${JAR_NAME}
 
 # Reset all the things
-if [ "${MC_RESET_ALL_THE_THINGS}" == "yes" ];
+if [ "${MC_RESET_ALL_THE_THINGS}" = "yes" ];
 then
   rm -Rf *
   echo 'Resetting all the things'
@@ -52,12 +52,22 @@ then
 fi
 
 # Configure server
+echo "MC_MOTD=${MC_MOTD}"
+echo "MC_GAMEMODE=${MC_GAMEMODE}"
+echo "MC_DIFFICULTY=${MC_DIFFICULTY}"
+echo "MC_RESOURCE_PACK=${MC_RESOURCE_PACK}"
+echo "MC_RESOURCE_PACK_SHA1=${MC_RESOURCE_PACK_SHA1}"
+echo "MC_FORCE_GAMEMODE=${MC_FORCE_GAMEMODE}"
+echo "MC_RESET_ALL_THE_THINGS=${MC_RESET_ALL_THE_THINGS}" 
+echo "MC_LEVEL_NAME=${MC_LEVEL_NAME}"
+
 sed -i "s/^motd=.*/motd=${MC_MOTD}/" server.properties
+sed -i "s/^gamemode=.*/gamemode=${MC_GAMEMODE}/" server.properties
 sed -i "s/^difficulty=.*/difficulty=${MC_DIFFICULTY}/" server.properties
 sed -i "s/^resource-pack=.*/resource-pack=${MC_RESOURCE_PACK}/" server.properties
 sed -i "s/^resource-pack-sha1=.*/resource-pack-sha1=${MC_RESOURCE_PACK_SHA1}/" server.properties
 sed -i "s/^force-gamemode=.*/force-gamemode=${MC_FORCE_GAMEMODE}/" server.properties
-
+sed -i "s/^level-name=.*/level-name=${MC_LEVEL_NAME}/" server.properties
 
 
 # Start server
