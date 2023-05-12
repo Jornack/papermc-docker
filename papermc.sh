@@ -19,6 +19,13 @@ fi
 JAR_NAME=paper-${MC_VERSION}-${PAPER_BUILD}.jar
 URL=${URL}/builds/${PAPER_BUILD}/downloads/${JAR_NAME}
 
+# Reset all the things
+if [ ! -z "${MC_RESET_ALL_THE_THINGS}" ];
+then
+  rm -Rf *
+  echo 'Resetting all the things'
+fi
+
 # Update if necessary
 if [ ! -e ${JAR_NAME} ]
 then
