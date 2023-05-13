@@ -1,0 +1,10 @@
+services:
+  papermc:
+    image: jornack/papermc:latest
+    container_name: papermc
+    restart: unless-stopped
+    env_file: .env
+    ports:
+     - 25565:25565
+    volumes:
+      - /opt/minecraft/papermc:/papermc
