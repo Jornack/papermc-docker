@@ -22,8 +22,13 @@ URL=${URL}/builds/${PAPER_BUILD}/downloads/${JAR_NAME}
 # Reset all the things
 if [ "${MC_RESET_ALL_THE_THINGS}" = "yes" ];
 then
+  TODAY=$(date +"%d-%m-%Y")
+  BACKUP_FILENAME="/tmp/${MC_LEVEL_NAME}.${TODAY}.tar.gz"
+  echo "Creating backup : ${BACKUP_FILENAME}"
+  tar czf "${BACKUP_FILENAME}" *
   rm -Rf *
-  echo 'Resetting all the things'
+  mv "${BACKUP_FILENAME}" .
+  echo 'Reset all the things'
 fi
 
 # Update if necessary
