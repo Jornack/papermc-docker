@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ ! -z "${MC_DEBUG}" ];
+if [ "${MC_DEBUG}" = "true" ];
 then
   set -x
 fi
