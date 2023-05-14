@@ -26,6 +26,7 @@ echo "MC_LEVEL_NAME=${MC_LEVEL_NAME}"
 echo "MC_SEED=${MC_SEED}"
 echo "MC_OPS_JSON=${MC_OPS_JSON}"
 echo "MC_WHITELIST_JSON=${MC_WHITELIST_JSON}"
+echo "MC_MAX_PLAYERS=${MC_MAX_PLAYERS}"
 
 # Get version information and build download URL and jar name
 URL=https://papermc.io/api/v2/projects/paper
@@ -98,6 +99,7 @@ sed -i "s/^resource-pack-sha1=.*/resource-pack-sha1=${MC_RESOURCE_PACK_SHA1}/" s
 sed -i "s/^force-gamemode=.*/force-gamemode=${MC_FORCE_GAMEMODE}/" server.properties
 sed -i "s/^level-name=.*/level-name=${MC_LEVEL_NAME}/" server.properties
 sed -i "s/^level-seed=.*/level-seed=${MC_SEED}/" server.properties
+sed -i "s/^max-players=.*/max-players=${MC_MAX_PLAYERS}/" server.properties
 
 # ops.json
 if [ ! -z "${MC_OPS_JSON}" ];
