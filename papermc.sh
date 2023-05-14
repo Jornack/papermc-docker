@@ -3,6 +3,10 @@ if [ "${MC_DEBUG}" = "true" ];
 then
   set -x
 fi
+if [ "${MC_STOP_ON_ERROR}" = "true" ];
+then
+  set -e
+fi
 
 # Enter server directory
 cd papermc
@@ -18,7 +22,6 @@ echo "MC_DIFFICULTY=${MC_DIFFICULTY}"
 echo "MC_RESOURCE_PACK=${MC_RESOURCE_PACK}"
 echo "MC_RESOURCE_PACK_SHA1=${MC_RESOURCE_PACK_SHA1}"
 echo "MC_FORCE_GAMEMODE=${MC_FORCE_GAMEMODE}"
-echo "MC_RESET_ALL_THE_THINGS=${MC_RESET_ALL_THE_THINGS}" 
 echo "MC_LEVEL_NAME=${MC_LEVEL_NAME}"
 echo "MC_SEED=${MC_SEED}"
 echo "MC_OPS_JSON=${MC_OPS_JSON}"
