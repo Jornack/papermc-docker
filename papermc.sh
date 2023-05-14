@@ -43,7 +43,7 @@ URL=${URL}/builds/${PAPER_BUILD}/downloads/${JAR_NAME}
 # Backup on startup
 if [ "${MC_BACKUP_ON_STARTUP}" = "true" ];
 then
-  TODAY=$(date +"%d-%m-%Y")
+  TODAY=$(date +"%d-%m-%Y-%H-%M-%S")
   BACKUP_DIR=backup
   if [ ! -d "${BACKUP_DIR}" ];
   then
