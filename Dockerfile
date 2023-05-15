@@ -28,6 +28,8 @@ ENV MC_MOTD="A Minecraft Server" \
     MC_MAX_PLAYERS=20
 
 COPY papermc.sh .
+RUN chmod +x papermc.sh
+
 RUN apt-get update \
     && apt-get install -y wget \
     && apt-get install -y jq \
@@ -35,7 +37,7 @@ RUN apt-get update \
     && mkdir /papermc
 
 # Start script
-CMD ["sh", "./papermc.sh"]
+CMD ["./papermc.sh"]
 
 # Container setup
 EXPOSE 25565/tcp

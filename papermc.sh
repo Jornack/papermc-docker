@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [ "${MC_DEBUG}" = "true" ];
 then
   set -x
@@ -27,6 +27,7 @@ echo "MC_SEED=${MC_SEED}"
 echo "MC_OPS_JSON=${MC_OPS_JSON}"
 echo "MC_WHITELIST_JSON=${MC_WHITELIST_JSON}"
 echo "MC_MAX_PLAYERS=${MC_MAX_PLAYERS}"
+echo "MC_PLUGIN_DOWNLOAD_URLS=${MC_PLUGIN_DOWNLOAD_URLS}"
 
 # Get version information and build download URL and jar name
 URL=https://papermc.io/api/v2/projects/paper
@@ -111,9 +112,21 @@ fi
 # whitelist.json
 if [ ! -z "${MC_WHITELIST_JSON}" ];
 then
-  echo 'Setting whitelisti.json'
+  echo 'Setting whitelist.json'
   echo "${MC_WHITELIST_JSON}" > whitelist.json
 fi
 
+# Download plugins
+if [ ! -z "${MC_PLUGIN_DOWNLOAD_URLS}" ];
+then
+  echo "Downloading plugins"
+  arrayList=( $MC_PLUGIN_DOWNLOAD_URLS )
+  cd plugins && rm -Rf *
+  for i in ${arrayList[@]};
+  do
+    wget "${i}"
+  done
+  cd -
+fi
 # Start server
 exec java -server ${JAVA_OPTS} -jar ${JAR_NAME} nogui
